@@ -41,15 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\UnregisteredValidationException.cs" />
     <Compile Include="Exceptions\ValueIsZeroException.cs" />
     <Compile Include="Exceptions\ValueNotZeroException.cs" />
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\DataValidationHelpers.cs" />
+    <Compile Include="Helpers\DictionaryExtensions.cs" />
     <Compile Include="Insist.cs" />
     <Compile Include="ValidationHandler.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Exceptions\ValueIsNullException.cs" />
     <Compile Include="Exceptions\ValueNotNullException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\CustomValidations.cs" />
     <Compile Include="Validations\ZeroValidations.cs" />
     <Compile Include="Validations\NullValidations.cs" />
   </ItemGroup>

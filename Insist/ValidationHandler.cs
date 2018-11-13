@@ -5,7 +5,7 @@ namespace Insist
 {
     public static class ValidationHandler
     {
-        public static void HandleValidation<T>(T value, Func<T, bool> validation, Exception exception)
+        public static void HandleValidation<T>(T value, Func<T, bool> validation, Exception exception, string validationExceptionMessage = null)
         {
             var shouldThrowException = false;
             try
@@ -15,8 +15,8 @@ namespace Insist
             }
             catch (Exception generalException)
             {
-                var insistExceptionName = exception.GetType().Name;
-                throw new ValidationException($"Insist Validation failed when validating exception: '{insistExceptionName}' due to general exception: [{generalException.Message}] thrown");
+                var displayMessage = validationExceptionMessage ?? $"exception: '{exception.GetType().Name}'";
+                throw new ValidationException($"Insist Validation failed on {displayMessage} due to general exception: [{generalException.Message}] thrown");
             }
 
             if (shouldThrowException)

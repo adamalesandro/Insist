@@ -1,4 +1,4 @@
-﻿using static Insist.Helpers;
+﻿using static Insist.Helpers.DataValidationHelpers;
 using System;
 using Xunit;
 

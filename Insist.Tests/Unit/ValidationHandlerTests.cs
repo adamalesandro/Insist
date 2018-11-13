@@ -21,7 +21,7 @@ namespace Insist.Tests.Unit
             bool Func(dynamic val) => val != 0;
             HandleValidation<object>(null, Func, new TestException());
             var exception = Assert.Throws<ValidationException>(() => HandleValidation("a thing", Func, new TestException()));
-            Assert.Equal("Insist Validation failed when validating exception: 'TestException' due to general exception: [Operator '!=' cannot be applied to operands of type 'string' and 'int'] thrown", exception.Message);
+            Assert.Equal("Insist Validation failed on exception: 'TestException' due to general exception: [Operator '!=' cannot be applied to operands of type 'string' and 'int'] thrown", exception.Message);
         }
     }
 }

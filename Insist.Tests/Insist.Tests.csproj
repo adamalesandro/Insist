@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Unit\HelperTests.cs" />
+    <Compile Include="Unit\CustomValidationTests.cs" />
     <Compile Include="Unit\ZeroTests.cs" />
     <Compile Include="Unit\ValidationHandlerTests.cs" />
     <Compile Include="Unit\NullTests.cs" />

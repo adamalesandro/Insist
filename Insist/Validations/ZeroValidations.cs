@@ -1,7 +1,7 @@
 ﻿using Insist.Exceptions;
 using System;
 using static Insist.ValidationHandler;
-using static Insist.Helpers;
+using static Insist.Helpers.DataValidationHelpers;
 
 namespace Insist.Validations
 {
