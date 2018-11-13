@@ -16,11 +16,13 @@ namespace Insist.Tests.Unit
             Insist.IsNull(new DateTime?());
             Insist.IsNull(new int?());
             Insist.IsNull(null);
+            Insist.IsNull(1, suppressExceptions: true);
 
             Assert.Throws<ValueNotNullException>(() => Insist.IsNull(32));
             Assert.Throws<ValueNotNullException>(() => Insist.IsNull(DateTime.Today));
             Assert.Throws<ValueNotNullException>(() => Insist.IsNull("string"));
             Assert.Throws<ValueNotNullException>(() => Insist.IsNull(new object()));
+            Assert.Throws<TestException>(() => Insist.IsNull(1, customException: new TestException()));
         }
 
         [Fact(DisplayName = "Not null check is correctly evaluated")]
@@ -32,11 +34,15 @@ namespace Insist.Tests.Unit
             Insist.IsNotNull(DateTime.Now);
             Insist.IsNotNull(100m);
             Insist.IsNotNull("notnull");
+            Insist.IsNotNull(null, suppressExceptions: true);
 
             Assert.Throws<ValueIsNullException>(() => Insist.IsNotNull(default(object)));
             Assert.Throws<ValueIsNullException>(() => Insist.IsNotNull(nullString));
             Assert.Throws<ValueIsNullException>(() => Insist.IsNotNull(new DateTime?()));
             Assert.Throws<ValueIsNullException>(() => Insist.IsNotNull(new int?()));
+            Assert.Throws<TestException>(() => Insist.IsNotNull(null, customException: new TestException()));
         }
     }
 }
+
+
