@@ -4,26 +4,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Insist.ValidationHandler;
 
 namespace Insist.Validations
 {
     public static class CollectionValidations
     {
-        public static void HasNoNulls<T>(IEnumerable<T> collection, string propertyName)
+        public static void HasNoNulls<T>(IEnumerable<T> collection, string propertyName, bool suppressExceptions, Exception customException)
         {
-            foreach (var item in collection)
+            bool Func(IEnumerable<T> set)
             {
-                var value = item?.GetType()?.GetProperty(propertyName)?.GetValue(item, null);
-
-                if (value == null)
-                    throw new CollectionContainsNullValueException();
+                foreach (var item in set)
+                {
+                    var value = item?.GetType()?.GetProperty(propertyName)?.GetValue(item, null);
+                    if (value == null)
+                        return false;
+                }
+                return true;
             }
+
+            if (!suppressExceptions)
+                HandleValidation(collection, Func, customException ?? new CollectionContainsNullValueException());
         }
 
-        public static void HasNoNulls<T>(IEnumerable<T> collection)
+        public static void HasNoNulls<T>(IEnumerable<T> collection, bool suppressExceptions, Exception customException)
         {
-            if (collection.Any(x => x == null))
-                throw new CollectionContainsNullValueException();
+            bool Func(IEnumerable<T> set) => set.All(x => x != null);
+
+            if (!suppressExceptions)
+                HandleValidation(collection, Func, customException ?? new CollectionContainsNullValueException());
         }
     }
 }

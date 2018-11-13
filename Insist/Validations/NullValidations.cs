@@ -1,24 +1,23 @@
 ﻿using Insist.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Insist.ValidationHandler;
 
 namespace Insist.Validations
 {
-    public static class NullValidations
+    internal static class NullValidations
     {
-        public static void IsNotNull(object value)
+        internal static void IsNull(object value, bool suppressExceptions, Exception customException)
         {
-            if (value == null)
-                throw new ValueIsNullException();
+            bool Func(object val) => val == null;
+            if (!suppressExceptions)
+                HandleValidation(value, Func, customException ?? new ValueNotNullException());
         }
 
-        public static void IsNull(object value)
+        internal static void IsNotNull(object value, bool suppressExceptions, Exception customException)
         {
-            if (value != null)
-                throw new ValueNotNullException();
+            bool Func(object val) => val != null;
+            if (!suppressExceptions)
+                HandleValidation(value, Func, customException ?? new ValueIsNullException());
         }
     }
 }
