@@ -12,6 +12,8 @@ namespace Insist.Tests.Unit
             var collection = new List<string> { "foo", "bar", null };
 
             Assert.Throws<CollectionContainsNullValueException>(() => Insist.HasNoNulls(collection));
+            Assert.Throws<TestException>(() => Insist.HasNoNulls(collection, customException: new TestException()));
+            Insist.HasNoNulls(collection, suppressExceptions: true);
 
             collection.Remove(null);
 
@@ -33,6 +35,8 @@ namespace Insist.Tests.Unit
             dogs[2].Age = null;
 
             Assert.Throws<CollectionContainsNullValueException>(() => Insist.HasNoNulls(dogs, nameof(Dog.Age)));
+            Assert.Throws<TestException>(() => Insist.HasNoNulls(dogs, nameof(Dog.Age), customException: new TestException()));
+            Insist.HasNoNulls(dogs, nameof(Dog.Age), suppressExceptions: true);
         }
     }
 
